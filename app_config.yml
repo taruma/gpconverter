@@ -2,7 +2,7 @@ DASH_APP:
   APP_TITLE: GP Summary Converter
   HEAD_TITLE: fiako-gpconv | GP Summary Converter
   UPDATE_TITLE: Updating...
-  DEBUG: True
+  DEBUG: False
   ALIAS: fiako-gpconv
 
 TEMPLATE:
