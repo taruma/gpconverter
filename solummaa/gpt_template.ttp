@@ -1,0 +1,177 @@
+<vars>
+FIRST_BLANK = "\s+"
+</vars>
+
+## >>>>> HEADER INFO
+
+<group name="HEADER_VERSION">
+{{ ignore("FIRST_BLANK") }}GROUP for Windows, Version {{ group_version | ORPHRASE }}
+</group>
+
+<group name="HEADER_DATETIME">
+{{ ignore("FIRST_BLANK") }}Date: {{ info_date | ORPHRASE }} Time: {{ info_time | ORPHRASE }}
+</group>
+
+## >>>>> HEADER COMPUTATION
+
+<group name="HEADER_COMPUTATION">
+{{ ignore("FIRST_BLANK") }}*****     COMPUTATION RESULTS     ***** {{ _start_ }}
+<group>
+{{ ignore("FIRST_BLANK") }}{{ comp_name | ORPHRASE }}
+</group>
+{{ ignore("FIRST_BLANK") }}*****     LOAD CASES RESULTS      ***** {{ _end_ }}
+</group>
+
+## >>>>> LOAD CASE 
+
+<group name="LOAD_{{ load_case }}">
+
+## ----- INFO LOAD CASE
+{{ ignore("FIRST_BLANK") }}LOAD CASE : {{ load_case | ORPHRASE | _start_ }}
+
+<group name="INFO">
+{{ ignore("FIRST_BLANK") }}CASE NAME : {{ case_name | ORPHRASE }}
+{{ ignore("FIRST_BLANK") }}LOAD TYPE : {{ load_type | ORPHRASE }}
+</group>
+
+## ----- REDUCTION FACTOR
+<group name="TABLE_REDUCTION_FACTOR">
+{{ ignore("FIRST_BLANK") }}GROUP NO     P-FACTOR     Y-FACTOR {{ _start_ }}    
+<group name="DATA">
+{{ ignore("FIRST_BLANK") }}{{ group_no | DIGIT | to_int }} {{ p_factor | to_float }} {{ y_factor | to_float }}
+</group>
+{{ _end_ }}
+</group>
+
+## ----- INFO EQUIVALENT v11 + v12
+<group name="INFO_COMPUTATION">
+{{ ignore("FIRST_BLANK") }}REDUCTION FACTORS FOR CLOSELY-SPACED PILE GROUPS, COMBINED Y AND Z DIRECTIONS {{ _start_ }}   
+<group name="EQUIVALENT_1">
+{{ ignore("FIRST_BLANK") }}VERT. LOAD,  KN    HOR. LOAD Y,  KN   HOR. LOAD Z,  KN {{ _start_ }}
+{{ ignore("FIRST_BLANK") }}{{ load_vert }} {{ load_hor_y }} {{ load_hor_z }}
+</group> 
+## v11 + v12
+<group name="EQUIVALENT_2">
+{{ ignore("FIRST_BLANK") }}MOMENT X , KN- M    MOMENT Y, KN- M    MOMENT Z, KN- M {{ _start_ }}
+{{ ignore("FIRST_BLANK") }}{{ mom_x }} {{ mom_y }} {{ mom_z }}
+</group>
+## v8
+<group name="EQUIVALENT_2">
+{{ ignore("FIRST_BLANK") }}MOMENT X , M- KN    MOMENT Y, M- KN    MOMENT Z, M- KN {{ _start_ }}
+{{ ignore("FIRST_BLANK") }}{{ mom_x }} {{ mom_y }} {{ mom_z }}
+</group>
+## ----- INFO DISPLACEMENT
+<group name="DISPLACEMENT_1">
+{{ ignore("FIRST_BLANK") }}VERTICAL , M      HORIZONTAL Y, M     HORIZONTAL Z, M {{ _start_ }}
+{{ ignore("FIRST_BLANK") }}{{ disp_vert }} {{ disp_hor_y }} {{ disp_hor_z }}
+</group>
+<group name="DISPLACEMENT_2">
+{{ ignore("FIRST_BLANK") }}ANGLE ROT. X,RAD    ANGLE ROT. Y,RAD    ANGLE ROT. Z,RAD {{ _start_ }}
+{{ ignore("FIRST_BLANK") }}{{ rot_x }} {{ rot_y }} {{ rot_z }}
+</group>
+{{ ignore("FIRST_BLANK") }}THE GLOBAL STRUCTURAL COORDINATE SYSTEM {{ _end_ }}
+</group>
+
+## ----- GLOBAL
+<group name="GLOBAL_COORDINATE">
+{{ ignore("FIRST_BLANK") }}THE GLOBAL STRUCTURAL COORDINATE SYSTEM {{ _start_ }}
+
+## ===== PILE TOP DISPLACEMENT (GLOBAL)
+<group name="TABLE_GLOBAL_PILE_TOP_DISPLACEMENTS">
+{{ ignore("FIRST_BLANK") }}PILE GROUP   DISP. X, M   DISP. Y, M   DISP. Z, M   ROT. X,RAD   ROT. Y,RAD   ROT. Z,RAD {{ _start_ }}
+<group name="DATA">
+{{ ignore("FIRST_BLANK") }}{{ pile_group | DIGIT | to_int }} {{ disp_x | to_float }} {{ disp_y | to_float }} {{ disp_z | to_float }} {{ rot_x | to_float }} {{ rot_y | to_float }} {{ rot_z | to_float }}
+</group>
+{{ ignore("FIRST_BLANK") }}* PILE TOP REACTIONS * {{ _end_ }}
+</group>
+
+## ===== PILE TOP REACTION (GLOBAL)
+<group name="TABLE_GLOBAL_PILE_TOP_REACTIONS">
+{{ ignore("FIRST_BLANK") }}PILE GROUP   FOR. X, KN   FOR. Y, KN   FOR. Z, KN MOM X, KN- M MOM Y, KN- M MOM Z, KN- M {{ _start_ }}
+<group name="DATA">
+{{ ignore("FIRST_BLANK") }}{{ pile_group | DIGIT | to_int }} {{ for_x | to_float }} {{ for_y | to_float }} {{ for_z | to_float }} {{ mom_x | to_float }} {{ mom_y | to_float }} {{ mom_z | to_float }}
+</group>
+{{ ignore("FIRST_BLANK") }}* PILE TOP REACTIONS * {{ _end_ }}
+</group>
+
+## ===== PILE TOP REACTION (GLOBAL)
+<group name="TABLE_GLOBAL_PILE_TOP_REACTIONS">
+{{ ignore("FIRST_BLANK") }}PILE GROUP   FOR. X, KN   FOR. Y, KN   FOR. Z, KN MOM X, KN- M MOM Y, KN- M MOM Z, KN- M  STRESS, KN/ M**2 {{ _start_ }}
+<group name="DATA">
+{{ ignore("FIRST_BLANK") }}{{ pile_group | DIGIT | to_int }} {{ for_x | to_float }} {{ for_y | to_float }} {{ for_z | to_float }} {{ mom_x | to_float }} {{ mom_y | to_float }} {{ mom_z | to_float }} {{ stress | to_float }}
+</group>
+{{ ignore("FIRST_BLANK") }}* PILE TOP REACTIONS * {{ _end_ }}
+</group>
+
+{{ ignore("FIRST_BLANK") }}THE PILE COORDINATE SYSTEM (LOCAL AXES) {{ _end_ }}
+</group>
+
+## ----- LOCAL
+
+<group name="LOCAL_COORDINATE">
+{{ ignore("FIRST_BLANK") }}THE PILE COORDINATE SYSTEM (LOCAL AXES) {{ _start_ }}
+
+## ===== PILE TOP DISPLACEMENTS (LOCAL)
+<group name="TABLE_LOCAL_PILE_TOP_DISPLACEMENTS">
+{{ ignore("FIRST_BLANK") }}PILE GROUP   DISP. x, M   DISP. y, M   DISP. z, M   ROT. x,RAD   ROT. y,RAD   ROT. z,RAD {{ _start_ }}
+<group name="DATA">
+{{ ignore("FIRST_BLANK") }}{{ pile_group | DIGIT | to_int }} {{ disp_x | to_float }} {{ disp_y | to_float }} {{ disp_z | to_float }} {{ rot_x | to_float }} {{ rot_y | to_float }} {{ rot_z | to_float }}
+</group>
+{{ ignore("FIRST_BLANK") }}* PILE TOP REACTIONS * {{ _end_ }}
+</group>
+
+## ===== PILE TOP REACTIONS (LOCAL) v11 + v12
+<group name="TABLE_LOCAL_PILE_TOP_REACTIONS">
+{{ ignore("FIRST_BLANK") }}PILE GROUP   AXIAL, KN    LAT. y, KN   LAT. z, KN MOM x, KN- M MOM y, KN- M MOM z, KN- M {{ _start_ }}
+## ===== PART 1
+<group name="DATA_1">
+{{ ignore("FIRST_BLANK") }}{{ pile_group | DIGIT | to_int }} {{ axial | to_float }} {{ lat_y | to_float }} {{ lat_z | to_float }} {{ mom_x | to_float }} {{ mom_y | to_float }} {{ mom_z | to_float }}
+</group>
+## ===== PART 2
+<group name="DATA_2">
+{{ ignore("FIRST_BLANK") }}{{ pile_group | DIGIT | to_int }} {{ stress | to_float }}
+</group>
+{{ ignore("FIRST_BLANK") }}* EFFECTS FOR LATERALLY LOADED PILE * {{ _end_ }}
+</group>
+
+## ===== PILE TOP REACTIONS (LOCAL) v8
+<group name="TABLE_LOCAL_PILE_TOP_REACTIONS">
+{{ ignore("FIRST_BLANK") }}PILE GROUP   AXIAL, KN    LAT. y, KN   LAT. z, KN MOM x, KN- M MOM y, KN- M MOM z, KN- M  STRESS, KN/ M**2 {{ _start_ }}
+<group name="DATA">
+{{ ignore("FIRST_BLANK") }}{{ pile_group | DIGIT | to_int }} {{ axial | to_float }} {{ lat_y | to_float }} {{ lat_z | to_float }} {{ mom_x | to_float }} {{ mom_y | to_float }} {{ mom_z | to_float }} {{ stress | to_float }}
+</group>
+{{ ignore("FIRST_BLANK") }}* EFFECTS FOR LATERALLY LOADED PILE * {{ _end_ }}
+</group>
+
+## ===== EFFECTS FOR LATERALLY LOADED PILE
+
+## ===== MINIMUM VALUES AND LOCATIONS
+<group name="TABLE_LOCAL_LATERAL_MINIMUM">
+{{ ignore("FIRST_BLANK") }}* MINIMUM VALUES AND LOCATIONS * {{ _start_ }}
+## {{ ignore("FIRST_BLANK") }}PILE     DISPL.      DISPL.      MOMENT      MOMENT       SHEAR       SHEAR    SOIL REACT  SOIL REACT     TOTAL    FLEX. RIG.  FLEX. RIG. {{ _start_ }}
+<group name="DATA">
+{{ ignore("FIRST_BLANK") }}{{ pile_group | DIGIT | to_int | _start_ }} {{ disp_y_dir | to_float }} {{ disp_z_dir | to_float }} {{ mom_z_dir | to_float }} {{ mom_y_dir | to_float }} {{ shear_y_dir | to_float }} {{ shear_z_dir | to_float }} {{ soil_y_dir | to_float }} {{ soil_z_dir | to_float }} {{ total_stress | to_float }} {{ flex_z_dir | to_float }} {{ flex_y_dir | to_float }}
+     x( M) {{ x_disp_y | to_float }} {{ x_disp_z | to_float }} {{ x_mom_z | to_float }} {{ x_mom_y | to_float }} {{ x_shear_y | to_float }} {{ x_shear_z | to_float }} {{ x_soil_y | to_float }} {{ x_soil_z | to_float }} {{ x_total | to_float }} {{ x_flex_z | to_float }} {{ x_flex_y | to_float }}
+</group>
+{{ ignore("FIRST_BLANK") }}* MAXIMUM VALUES AND LOCATIONS * {{ _end_ }}
+</group>
+
+## ===== MAXIMUM VALUES AND LOCATIONS
+<group name="TABLE_LOCAL_LATERAL_MAXIMUM">
+{{ ignore("FIRST_BLANK") }}* MAXIMUM VALUES AND LOCATIONS * {{ _start_ }}
+## {{ ignore("FIRST_BLANK") }}PILE     DISPL.      DISPL.      MOMENT      MOMENT       SHEAR       SHEAR    SOIL REACT  SOIL REACT     TOTAL    FLEX. RIG.  FLEX. RIG. {{ _start_ }}
+<group name="DATA">
+{{ ignore("FIRST_BLANK") }}{{ pile_group | DIGIT | to_int | _start_ }} {{ disp_y_dir | to_float }} {{ disp_z_dir | to_float }} {{ mom_z_dir | to_float }} {{ mom_y_dir | to_float }} {{ shear_y_dir | to_float }} {{ shear_z_dir | to_float }} {{ soil_y_dir | to_float }} {{ soil_z_dir | to_float }} {{ total_stress | to_float }} {{ flex_z_dir | to_float }} {{ flex_y_dir | to_float }}
+     x( M) {{ x_disp_y | to_float }} {{ x_disp_z | to_float }} {{ x_mom_z | to_float }} {{ x_mom_y | to_float }} {{ x_shear_y | to_float }} {{ x_shear_z | to_float }} {{ x_soil_y | to_float }} {{ x_soil_z | to_float }} {{ x_total | to_float }} {{ x_flex_z | to_float }} {{ x_flex_y | to_float }}
+</group>
+{{ ignore("FIRST_BLANK") }}LOAD CASE : {{ ignore }} {{ _end_ }}
+</group>
+
+{{ ignore("FIRST_BLANK") }}LOAD CASE : {{ ignore }} {{ _end_ }}
+</group>
+
+{{ ignore("FIRST_BLANK") }}*****     SUMMARY FOR LOAD CASES AND COMBINATIONS      ***** {{ _end_ }}
+</group>
+
+## >>>>> SUMMARY
+
