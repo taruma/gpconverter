@@ -283,7 +283,7 @@ def __load_records(gpt_summary, load_case):
     case_name = gpt_summary["LOAD"][load_case]["INFO_LOAD"]['case_name']
     load_type = gpt_summary["LOAD"][load_case]["INFO_LOAD"]['load_type']
 
-    for index, item in enumerate(zip_gpt):
+    for index, item in enumerate(zip_gpt, 1):
         new_item = {}
         new_item["pile_id"] = f"p{index}_{load_case}"
         new_item["load_id"] = load_case
