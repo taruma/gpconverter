@@ -1,4 +1,4 @@
-import dash_mantine_components as dmc
+
 import dash_bootstrap_components as dbc
 from dash import Dash, Input, Output, html, State, dcc
 import pylayout
@@ -32,6 +32,7 @@ server = app.server
 
 app.layout = dbc.Container(
     [
+        html.Br(),
         pylayout.HTML_TITLE,
         html.Br(),
         dcc.Store("store-gpt-summary"),
@@ -60,7 +61,8 @@ app.layout = dbc.Container(
     Output("button-json", "disabled"),
     Output("button-records-json", "disabled"),
     Output("button-records-csv", "disabled"),
-    Output("info-md", "children"),
+    Output("info-loading", "children"),
+    Output("button-records-csv", "outline"),
     Input("dcc-upload", "contents"),
     State("dcc-upload", "filename"),
     State("dcc-upload", "last_modified"),
@@ -99,7 +101,7 @@ def callback_upload(contents, filename, filedate):
         'filedate': filedate,
     }
 
-    return gpt_summary, gpt_records, metadata, False, False, False, markdown
+    return gpt_summary, gpt_records, metadata, False, False, False, dcc.Markdown(markdown, id="info-md", className="text-center"), True
 
 @app.callback(
     Output("download-json", "data"),

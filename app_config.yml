@@ -1,14 +1,14 @@
 DASH_APP:
-  APP_TITLE: GP Summary Converter
-  HEAD_TITLE: fiako-gpconv | GP Summary Converter
+  APP_TITLE: GP Converter
+  HEAD_TITLE: fiako-gpconverter | GP Converter
   UPDATE_TITLE: Updating...
   DEBUG: False
-  ALIAS: fiako-gpconv
+  ALIAS: fiako-gpconverter
 
 TEMPLATE:
   WATERMARK_SOURCE: 
-  THEME: SKETCHY
+  THEME: MORPH
 
-VERSION: v0.1.0
-GITHUB_LINK: https://github.com/fiakoenjiniring/gpconv
-GITHUB_REPO: fiakoenjiniring/gpconv
+VERSION: v0.2.0
+GITHUB_LINK: https://github.com/fiakoenjiniring/gpconverter
+GITHUB_REPO: fiakoenjiniring/gpconverter

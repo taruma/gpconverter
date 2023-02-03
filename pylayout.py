@@ -1,7 +1,4 @@
 import dash_bootstrap_components as dbc
-import plotly.io as pio
-
-# import pyfigure, pylayoutfunc, pyfunc  # noqa
 from dash import html, dcc
 from pyconfig import appConfig
 
@@ -13,6 +10,9 @@ HTML_TITLE = html.Div(
             [appConfig.GITHUB_REPO, "@", appConfig.VERSION], className="text-muted"
         ),
         html.Br(),
+        html.Span(
+            dcc.Markdown("created by **fiako**dev"), className="text-muted"
+        ),
     ],
     className="text-center",
 )
@@ -51,7 +51,9 @@ HTML_ROW_UPLOAD = html.Div(
 )
 
 HTML_ROW_INFO = html.Div(
-    [dcc.Markdown("# info", id="info-md", className="text-center")]
+    [
+        dcc.Loading(dcc.Markdown("## upload **single** `.gp[8/11/12]t` file as `.zip` file", className="text-center"),id="info-loading"),
+    ]
 )
 
 HTML_ROW_DOWNLOAD = html.Div(
@@ -62,7 +64,7 @@ HTML_ROW_DOWNLOAD = html.Div(
                     [dbc.Button(
                         "Download Summary (json)",
                         color="success",
-                        class_name="fs-4 fw-bold",
+                        class_name="fs-4 fw-bold m-1",
                         id="button-json",
                         disabled=True,
                     )],
@@ -71,8 +73,9 @@ HTML_ROW_DOWNLOAD = html.Div(
                     [dbc.Button(
                         "Download Records (csv)",
                         color="info",
-                        class_name="fs-4 fw-bold",
+                        class_name="fs-4 fw-bold m-1",
                         id="button-records-csv",
+                        outline=False,
                         disabled=True,
                     )],
                 ),
@@ -80,7 +83,7 @@ HTML_ROW_DOWNLOAD = html.Div(
                     [dbc.Button(
                         "Download Records (json)",
                         color="warning",
-                        class_name="fs-4 fw-bold",
+                        class_name="fs-4 fw-bold m-1",
                         id="button-records-json",
                         disabled=True,
                     )],
